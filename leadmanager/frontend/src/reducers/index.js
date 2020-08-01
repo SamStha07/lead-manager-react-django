@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
+import leadsReducer from "./leadsReducer";
 
 export default combineReducers({
-  replace: () => "hi,there!",
+  leads: leadsReducer,
 });
