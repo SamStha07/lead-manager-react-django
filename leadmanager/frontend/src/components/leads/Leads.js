@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { getLeads } from "../../actions/index";
+import { getLeads, deleteLead } from "../../actions/index";
 
 class Leads extends Component {
   static propTypes = {
     leads: PropTypes.array.isRequired,
+    getLeads: PropTypes.func.isRequired,
+    deleteLead: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
@@ -35,7 +37,12 @@ class Leads extends Component {
                 <td>{lead.email}</td>
                 <td>{lead.message}</td>
                 <td>
-                  <button className="btn btn-danger btn-sm">Delete</button>
+                  <button
+                    className="btn btn-danger btn-sm"
+                    onClick={this.props.deleteLead.bind(this, lead.id)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
@@ -51,4 +58,4 @@ function mapStateToProps(state) {
   return { leads: state.leads.leads };
 }
 
-export default connect(mapStateToProps, { getLeads })(Leads);
+export default connect(mapStateToProps, { getLeads, deleteLead })(Leads);
